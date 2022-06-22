@@ -20,7 +20,14 @@ function App() {
 
   function P1DrawOneCard() {
     let cardDrawn = getRandomIntInclusive(0, deck.length);
-    setCardsP1([deck[cardDrawn].value + ' of ' + deck[cardDrawn].suit]);
+    let newCard = deck.splice(cardDrawn, 1);
+    setCardsP1(deck => [...deck, newCard[0]]);
+  }
+
+  function P2DrawOneCard() {
+    let cardDrawn = getRandomIntInclusive(0, deck.length);
+    let newCard = deck.splice(cardDrawn, 1);
+    setCardsP2(deck => [...deck, newCard[0]]);
   }
 
   function P1Bet() {
@@ -33,10 +40,6 @@ function App() {
     setPot(pot + 1);
   }
 
-  function P2DrawOneCard() {
-    let cardDrawn = getRandomIntInclusive(0, deck.length);
-    setCardsP2([deck[cardDrawn].value + ' of ' + deck[cardDrawn].suit]);
-  }
 
   return (
     <div className="App">
@@ -46,22 +49,35 @@ function App() {
       <div>Pot: ${pot}</div>
       <h2>Player 1</h2>
       <div>Chips: ${chipsP1}</div>
-      <div>Cards: {cardsP1}</div>
-      <button onClick={P1DrawOneCard}>Draw One Card</button>
-      <button onClick={P1Bet}>Bet</button>
-      <h2>Player 2</h2>
-      <div>Chips: ${chipsP2}</div>
-      <div>Cards: {cardsP2}</div>
-      <button onClick={P2DrawOneCard}>Draw One Card</button>
-      <button onClick={P2Bet}>Bet</button>
-      <h2>Deck of {deck.length}</h2>
       <ul>{
-        deck.map((card) =>
+        cardsP1.map((card) =>
           <li key={card.id}>
             {card.value} of {card.suit}
           </li>
         )
       }</ul>
+      <button onClick={P1DrawOneCard}>Draw One Card</button>
+      <button onClick={P1Bet}>Bet</button>
+      <h2>Player 2</h2>
+      <div>Chips: ${chipsP2}</div>
+      <div>Cards:</div>
+      <ul>{
+        cardsP2.map((card) =>
+          <li key={card.id}>
+            {card.value} of {card.suit}
+          </li>
+        )
+      }</ul>
+      <button onClick={P2DrawOneCard}>Draw One Card</button>
+      <button onClick={P2Bet}>Bet</button>
+      <h2>Deck of {deck.length}</h2>
+      <ol>{
+        deck.map((card) =>
+          <li key={card.id}>
+            {card.value} of {card.suit}
+          </li>
+        )
+      }</ol>
     </div>
   );
 }
