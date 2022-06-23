@@ -9,6 +9,7 @@ button {
 section.playArea {
   display: grid;
   row-gap: 0.6rem;
+  max-width: 58rem;
 }
 
 @media (min-width: 438px) {
