@@ -55,51 +55,66 @@ function App() {
 
       <h1>Poker</h1>
 
-      <div>{communityCards.length} Community Cards</div>
-      <button onClick={drawCommunityCard}>Draw One Card</button>
-      <ul>{
-        communityCards.map((card) =>
-          <li key={card.id}>
-            {card.value} of {card.suit}
-          </li>
-        )
-      }</ul>
-      <div>Pot: ${pot}</div>
+      <section className="playArea">
 
-      <h2>Player 1</h2>
-      <div>Chips: ${chipsP1}</div>
-      <button onClick={P1DrawOneCard}>Draw One Card</button>
-      <button onClick={P1Bet}>Bet $1</button>
-      <div>{cardsP1.length} Card Hand</div>
-      <ul>{
-        cardsP1.map((card) =>
-          <li key={card.id}>
-            {card.value} of {card.suit}
-          </li>
-        )
-      }</ul>
+        <section>
+          <h2>Board</h2>
+          <div>Pot: ${pot}</div>
+          <button onClick={drawCommunityCard}>Draw One Card</button>
+          <div>{communityCards.length} Community Cards</div>
+          <ul>{
+            communityCards.map((card) =>
+              <li key={card.id}>
+                {card.value} of {card.suit}
+              </li>
+            )
+          }</ul>
+        </section>
 
-      <h2>Player 2</h2>
-      <div>Chips: ${chipsP2}</div>
-      <button onClick={P2DrawOneCard}>Draw One Card</button>
-      <button onClick={P2Bet}>Bet $1</button>
-      <div>{cardsP2.length} Card Hand</div>
-      <ul>{
-        cardsP2.map((card) =>
-          <li key={card.id}>
-            {card.value} of {card.suit}
-          </li>
-        )
-      }</ul>
+        <section>
+          <h2>Player 1</h2>
+          <div>Chips: ${chipsP1}</div>
+          <button onClick={P1DrawOneCard}>Draw One Card</button>
+          <button onClick={P1Bet}>Bet $1</button>
+          <div>{cardsP1.length} Card Hand</div>
+          <ul>{
+            cardsP1.map((card) =>
+              <li key={card.id}>
+                {card.value} of {card.suit}
+              </li>
+            )
+          }</ul>
+        </section>
 
-      <h2>{deck.length} Card Deck</h2>
-      <ul>{
-        deck.map((card) =>
-          <li key={card.id}>
-            {card.value} of {card.suit}
-          </li>
-        )
-      }</ul>
+        <section>
+          <h2>Player 2</h2>
+          <div>Chips: ${chipsP2}</div>
+          <button onClick={P2DrawOneCard}>Draw One Card</button>
+          <button onClick={P2Bet}>Bet $1</button>
+          <div>{cardsP2.length} Card Hand</div>
+          <ul>{
+            cardsP2.map((card) =>
+              <li key={card.id}>
+                {card.value} of {card.suit}
+              </li>
+            )
+          }</ul>
+        </section>
+
+        <section>
+          <h2>{deck.length} Card Deck</h2>
+          <ul>{
+            deck.map((card) =>
+              <li key={card.id}>
+                {card.value} of {card.suit}
+              </li>
+            )
+          }</ul>
+        </section>
+
+      </section>
+
+
     </div>
   );
 }

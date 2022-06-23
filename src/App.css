@@ -5,3 +5,31 @@
 button {
   margin-right: 0.6rem;
 }
+
+section.playArea {
+  display: grid;
+  row-gap: 0.6rem;
+}
+
+@media (min-width: 438px) {
+  section.playArea {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 680px) {
+  section.playArea {
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 1.2rem;
+  }
+}
+
+@media (min-width: 892px) {
+  section.playArea {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+h2 {
+  margin-top: 0;
+}
