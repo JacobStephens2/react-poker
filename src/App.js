@@ -61,7 +61,7 @@ function App() {
           <h2>Board</h2>
           <div>Pot: ${pot}</div>
           <button onClick={drawCommunityCard}>Draw One Card</button>
-          <div>{communityCards.length} Community Cards</div>
+          <div>{communityCards.length} Community Card{communityCards.length == 1 ? '' : 's'}</div>
           <ul>{
             communityCards.map((card) =>
               <li key={card.id}>
