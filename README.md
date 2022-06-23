@@ -1,5 +1,7 @@
 # React Poker
+
 This is a poker app running on React and created with Create React App.
+
 ---
 ## Getting Started with Create React App
 
