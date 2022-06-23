@@ -20,14 +20,16 @@ function App() {
 
   function P1DrawOneCard() {
     let cardDrawn = getRandomIntInclusive(0, deck.length);
-    let newCard = deck.splice(cardDrawn, 1);
-    setCardsP1(deck => [...deck, newCard[0]]);
+    let newCard = deck[cardDrawn];
+    setCardsP1(deck => [...deck, newCard]);
+    setDeck(deck.filter(deck => deck.id != newCard.id))
   }
 
   function P2DrawOneCard() {
     let cardDrawn = getRandomIntInclusive(0, deck.length);
-    let newCard = deck.splice(cardDrawn, 1);
-    setCardsP2(deck => [...deck, newCard[0]]);
+    let newCard = deck[cardDrawn];
+    setCardsP2(deck => [...deck, newCard]);
+    setDeck(deck.filter(deck => deck.id != newCard.id))
   }
 
   function P1Bet() {
