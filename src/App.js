@@ -74,10 +74,29 @@ function App() {
     setCardsP2([]);
   }
 
+  function P1TakePot() {
+    setChipsP1(pot + chipsP1);
+    setPot(0);
+  }
+
+  function P2TakePot() {
+    setChipsP2(pot + chipsP2);
+    setPot(0);
+  }
+
+  function resetChips() {
+    setPot(0);
+    setChipsP1(80);
+    setChipsP2(80);
+  }
+
   return (
     <div className="App">
 
-      <h1>React Poker</h1>
+      <section className="overview">
+        <h1>React Poker</h1>
+        <button onClick={resetChips}>Reset Chips</button>
+      </section>
 
       <section className="playArea">
 
@@ -85,7 +104,9 @@ function App() {
           <h2>Board</h2>
           <button onClick={drawCommunityCard}>Draw One Card</button>
           <div>Pot: ${pot}</div>
-          <div>{communityCards.length} Community Card{communityCards.length === 1 ? '' : 's'}</div>
+          <div>
+            {communityCards.length} Community Card{communityCards.length === 1 ? '' : 's'}
+          </div>
           <ul>{
             communityCards.map((card) =>
               <li key={card.id}>
@@ -99,6 +120,7 @@ function App() {
           <h2>Player 1</h2>
           <button onClick={P1DrawOneCard}>Draw One Card</button>
           <button onClick={P1Bet}>Bet $1</button>
+          <button onClick={P1TakePot}>Take Pot</button>
           <div>Chips: ${chipsP1}</div>
           <div>{cardsP1.length} Card Hand</div>
           <ul>{
@@ -114,6 +136,7 @@ function App() {
           <h2>Player 2</h2>
           <button onClick={P2DrawOneCard}>Draw One Card</button>
           <button onClick={P2Bet}>Bet $1</button>
+          <button onClick={P2TakePot}>Take Pot</button>
           <div>Chips: ${chipsP2}</div>
           <div>{cardsP2.length} Card Hand</div>
           <ul>{
