@@ -152,13 +152,6 @@ function App() {
           <h2>{deck.length} Card Deck</h2>
           <button onClick={handleShuffle}>Shuffle</button>
           <button onClick={gatherCards}>Gather Cards</button>
-          <ul>{
-            deck.map((card) =>
-              <li key={card.id}>
-                {card.value} of {card.suit}
-              </li>
-            )
-          }</ul>
         </section>
 
       </section>
