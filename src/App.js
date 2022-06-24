@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FrenchDeck from './components/FrenchDeck.js';
 
 function App() {
@@ -11,30 +11,20 @@ function App() {
   const [communityCards, setCommunityCards] = useState([]);
   const [pot, setPot] = useState(0);
 
-  function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1) + min);
-    // The maximum and minimum are both inclusive
-  }
-
   function P1DrawOneCard() {
-    let cardDrawn = getRandomIntInclusive(0, deck.length);
-    let newCard = deck[cardDrawn];
+    let newCard = deck[0];
     setDeck(deck.filter(deck => deck.id !== newCard.id))
     setCardsP1(deck => [...deck, newCard]);
   }
 
   function P2DrawOneCard() {
-    let cardDrawn = getRandomIntInclusive(0, deck.length);
-    let newCard = deck[cardDrawn];
+    let newCard = deck[0];
     setDeck(deck.filter(deck => deck.id !== newCard.id))
     setCardsP2(deck => [...deck, newCard]);
   }
 
   function drawCommunityCard() {
-    let cardDrawn = getRandomIntInclusive(0, deck.length);
-    let newCard = deck[cardDrawn];
+    let newCard = deck[0];
     setDeck(deck.filter(deck => deck.id !== newCard.id))
     setCommunityCards(deck => [...deck, newCard]);
   }
@@ -49,9 +39,8 @@ function App() {
     setPot(pot + 1);
   }
 
-  function shuffleDeck() {
-    let newDeck = deck;
-    let currentIndex = newDeck.length, randomIndex;
+  function shuffle(array) {
+    let currentIndex = array.length, randomIndex;
 
     // While there remain elements to shuffle.
     while (currentIndex !== 0) {
@@ -61,12 +50,23 @@ function App() {
       currentIndex--;
 
       // And swap it with the current element.
-      [newDeck[currentIndex], newDeck[randomIndex]] = [
-        newDeck[randomIndex], newDeck[currentIndex]];
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
     }
-    return newDeck;
+    return array;
   }
-  console.log(deck);
+
+  useEffect(() => {
+    const mountArray = shuffle([...deck]);
+    setDeck(mountArray);
+  }, []);
+
+  function handleShuffle() {
+    const changes = shuffle([...deck]);
+    setDeck(changes);
+  }
+
+
 
   return (
     <div className="App">
@@ -77,8 +77,8 @@ function App() {
 
         <section>
           <h2>Board</h2>
-          <div>Pot: ${pot}</div>
           <button onClick={drawCommunityCard}>Draw One Card</button>
+          <div>Pot: ${pot}</div>
           <div>{communityCards.length} Community Card{communityCards.length === 1 ? '' : 's'}</div>
           <ul>{
             communityCards.map((card) =>
@@ -91,9 +91,9 @@ function App() {
 
         <section>
           <h2>Player 1</h2>
-          <div>Chips: ${chipsP1}</div>
           <button onClick={P1DrawOneCard}>Draw One Card</button>
           <button onClick={P1Bet}>Bet $1</button>
+          <div>Chips: ${chipsP1}</div>
           <div>{cardsP1.length} Card Hand</div>
           <ul>{
             cardsP1.map((card) =>
@@ -106,9 +106,9 @@ function App() {
 
         <section>
           <h2>Player 2</h2>
-          <div>Chips: ${chipsP2}</div>
           <button onClick={P2DrawOneCard}>Draw One Card</button>
           <button onClick={P2Bet}>Bet $1</button>
+          <div>Chips: ${chipsP2}</div>
           <div>{cardsP2.length} Card Hand</div>
           <ul>{
             cardsP2.map((card) =>
@@ -121,7 +121,7 @@ function App() {
 
         <section>
           <h2>{deck.length} Card Deck</h2>
-          <button>Shuffle</button>
+          <button onClick={handleShuffle}>Shuffle</button>
           <ul>{
             deck.map((card) =>
               <li key={card.id}>
