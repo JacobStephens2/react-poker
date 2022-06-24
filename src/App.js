@@ -77,7 +77,7 @@ function App() {
   return (
     <div className="App">
 
-      <h1>Poker</h1>
+      <h1>React Poker</h1>
 
       <section className="playArea">
 
