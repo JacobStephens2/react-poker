@@ -21,21 +21,21 @@ function App() {
   function P1DrawOneCard() {
     let cardDrawn = getRandomIntInclusive(0, deck.length);
     let newCard = deck[cardDrawn];
-    setDeck(deck.filter(deck => deck.id != newCard.id))
+    setDeck(deck.filter(deck => deck.id !== newCard.id))
     setCardsP1(deck => [...deck, newCard]);
   }
 
   function P2DrawOneCard() {
     let cardDrawn = getRandomIntInclusive(0, deck.length);
     let newCard = deck[cardDrawn];
-    setDeck(deck.filter(deck => deck.id != newCard.id))
+    setDeck(deck.filter(deck => deck.id !== newCard.id))
     setCardsP2(deck => [...deck, newCard]);
   }
 
   function drawCommunityCard() {
     let cardDrawn = getRandomIntInclusive(0, deck.length);
     let newCard = deck[cardDrawn];
-    setDeck(deck.filter(deck => deck.id != newCard.id))
+    setDeck(deck.filter(deck => deck.id !== newCard.id))
     setCommunityCards(deck => [...deck, newCard]);
   }
 
@@ -49,6 +49,24 @@ function App() {
     setPot(pot + 1);
   }
 
+  function shuffleDeck() {
+    let newDeck = deck;
+    let currentIndex = newDeck.length, randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex !== 0) {
+
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [newDeck[currentIndex], newDeck[randomIndex]] = [
+        newDeck[randomIndex], newDeck[currentIndex]];
+    }
+    return newDeck;
+  }
+  console.log(deck);
 
   return (
     <div className="App">
@@ -61,7 +79,7 @@ function App() {
           <h2>Board</h2>
           <div>Pot: ${pot}</div>
           <button onClick={drawCommunityCard}>Draw One Card</button>
-          <div>{communityCards.length} Community Card{communityCards.length == 1 ? '' : 's'}</div>
+          <div>{communityCards.length} Community Card{communityCards.length === 1 ? '' : 's'}</div>
           <ul>{
             communityCards.map((card) =>
               <li key={card.id}>
@@ -103,6 +121,7 @@ function App() {
 
         <section>
           <h2>{deck.length} Card Deck</h2>
+          <button>Shuffle</button>
           <ul>{
             deck.map((card) =>
               <li key={card.id}>
@@ -115,7 +134,7 @@ function App() {
       </section>
 
 
-    </div>
+    </div >
   );
 }
 
