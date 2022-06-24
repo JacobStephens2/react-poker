@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import FrenchDeck from './components/FrenchDeck.js';
+import FrenchDeck from './FrenchDeck.js';
 
 function App() {
   const [chipsP1, setChipsP1] = useState(80);
