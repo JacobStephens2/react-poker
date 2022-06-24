@@ -66,8 +66,8 @@ function App() {
   }, []);
 
   function handleShuffle() {
-    const changes = shuffle([...deck]);
-    setDeck(changes);
+    const shuffledDeck = shuffle([...deck]);
+    setDeck(shuffledDeck);
   }
 
   function gatherCards() {
