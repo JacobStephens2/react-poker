@@ -42,6 +42,7 @@ function App() {
     setPot(pot + 1);
   }
 
+  // This is the Fisher-Yates shuffle algorithm
   function shuffle(array) {
     let currentIndex = array.length, randomIndex;
 
