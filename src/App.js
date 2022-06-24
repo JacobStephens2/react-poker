@@ -56,6 +56,7 @@ function App() {
     return array;
   }
 
+  // shuffle deck on page load
   useEffect(() => {
     const mountArray = shuffle([...deck]);
     setDeck(mountArray);
@@ -66,7 +67,12 @@ function App() {
     setDeck(changes);
   }
 
-
+  function gatherCards() {
+    setDeck(shuffle(FrenchDeck));
+    setCommunityCards([]);
+    setCardsP1([]);
+    setCardsP2([]);
+  }
 
   return (
     <div className="App">
@@ -122,6 +128,7 @@ function App() {
         <section>
           <h2>{deck.length} Card Deck</h2>
           <button onClick={handleShuffle}>Shuffle</button>
+          <button onClick={gatherCards}>Gather Cards</button>
           <ul>{
             deck.map((card) =>
               <li key={card.id}>
