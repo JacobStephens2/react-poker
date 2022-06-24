@@ -10,6 +10,9 @@ function App() {
   const [deck, setDeck] = useState(FrenchDeck);
   const [communityCards, setCommunityCards] = useState([]);
   const [pot, setPot] = useState(0);
+  const [deckVisibility, setDeckVisibility] = useState('none');
+  const [p1HandVisibility, setP1HandVisibility] = useState('none');
+  const [p2HandVisibility, setP2HandVisibility] = useState('none');
 
   function P1DrawOneCard() {
     let newCard = deck[0];
@@ -90,6 +93,27 @@ function App() {
     setChipsP2(80);
   }
 
+  function revealDeck() {
+    setDeckVisibility('block');
+  }
+  function concealDeck() {
+    setDeckVisibility('none');
+  }
+
+  function revealP1Hand() {
+    setP1HandVisibility('block');
+  }
+  function concealP1Hand() {
+    setP1HandVisibility('none');
+  }
+
+  function revealP2Hand() {
+    setP2HandVisibility('block');
+  }
+  function concealP2Hand() {
+    setP2HandVisibility('none');
+  }
+
   return (
     <div className="App">
 
@@ -102,8 +126,8 @@ function App() {
 
         <section>
           <h2>Board</h2>
+          <p>Pot: ${pot}</p>
           <button onClick={drawCommunityCard}>Draw One Card</button>
-          <div>Pot: ${pot}</div>
           <div>
             {communityCards.length} Community Card{communityCards.length === 1 ? '' : 's'}
           </div>
@@ -118,12 +142,17 @@ function App() {
 
         <section>
           <h2>Player 1</h2>
-          <button onClick={P1DrawOneCard}>Draw One Card</button>
+          <p>Chips: ${chipsP1}</p>
           <button onClick={P1Bet}>Bet $1</button>
           <button onClick={P1TakePot}>Take Pot</button>
-          <div>Chips: ${chipsP1}</div>
-          <div>{cardsP1.length} Card Hand</div>
-          <ul>{
+          <p>{cardsP1.length} Card Hand</p>
+          <button onClick={P1DrawOneCard}>Draw One Card</button>
+          {
+            p1HandVisibility == 'none'
+              ? <button onClick={revealP1Hand}>Reveal Hand</button>
+              : <button onClick={concealP1Hand}>Conceal Hand</button>
+          }
+          <ul style={{ display: p1HandVisibility }}> {
             cardsP1.map((card) =>
               <li key={card.id}>
                 {card.value} of {card.suit}
@@ -134,12 +163,17 @@ function App() {
 
         <section>
           <h2>Player 2</h2>
-          <button onClick={P2DrawOneCard}>Draw One Card</button>
+          <p>Chips: ${chipsP2}</p>
           <button onClick={P2Bet}>Bet $1</button>
           <button onClick={P2TakePot}>Take Pot</button>
-          <div>Chips: ${chipsP2}</div>
-          <div>{cardsP2.length} Card Hand</div>
-          <ul>{
+          <p>{cardsP2.length} Card Hand</p>
+          <button onClick={P2DrawOneCard}>Draw One Card</button>
+          {
+            p2HandVisibility == 'none'
+              ? <button onClick={revealP2Hand}>Reveal Hand</button>
+              : <button onClick={concealP2Hand}>Conceal Hand</button>
+          }
+          <ul style={{ display: p2HandVisibility }}> {
             cardsP2.map((card) =>
               <li key={card.id}>
                 {card.value} of {card.suit}
@@ -152,6 +186,18 @@ function App() {
           <h2>{deck.length} Card Deck</h2>
           <button onClick={handleShuffle}>Shuffle</button>
           <button onClick={gatherCards}>Gather Cards</button>
+          {
+            deckVisibility == 'none'
+              ? <button onClick={revealDeck}>Reveal Deck</button>
+              : <button onClick={concealDeck}>Conceal Deck</button>
+          }
+          <ul style={{ display: deckVisibility }}>{
+            deck.map((card) =>
+              <li key={card.id}>
+                {card.value} of {card.suit}
+              </li>
+            )
+          }</ul>
         </section>
 
       </section>
